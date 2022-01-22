@@ -1,6 +1,5 @@
 import { SearchIcon } from "@heroicons/react/outline";
-import { useState } from "react";
-import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import Link from "next/link";
 import { InputType, OutputType } from "../types";
 
 const menus: InputType[] = [
@@ -68,19 +67,17 @@ const MenuItem = ({
   data: OutputType;
   input: string;
 }) => {
-  let resolved = useResolvedPath(href);
-  let match = useMatch({ path: resolved.pathname, end: true });
-
   return (
-    <Link
-      to={href}
-      className={`w-full h-8 rounded-md flex items-center justify-start px-4 truncate ${
-        match
-          ? "bg-primary-500 text-white"
-          : "hover:bg-gray-100 dark:hover:bg-gray-800"
-      }`}
-    >
-      {input} to {name}
+    <Link href={href}>
+      <a
+        className={`w-full h-8 rounded-md flex items-center justify-start px-4 truncate ${
+          false
+            ? "bg-primary-500 text-white"
+            : "hover:bg-gray-100 dark:hover:bg-gray-800"
+        }`}
+      >
+        {input} to {name}
+      </a>
     </Link>
   );
 };

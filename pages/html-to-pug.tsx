@@ -1,5 +1,5 @@
 const HtmlToPug = () => {
-  return <div>Html To Pug</div>;
+  return <div>HTML to Pug</div>;
 };
 
 export default HtmlToPug;

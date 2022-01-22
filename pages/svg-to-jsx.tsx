@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import Coverter from "../Coverter";
-import transform from "@balajmarius/svg2jsx/index";
 import isSvg from "is-svg";
+import { useEffect, useState } from "react";
+import Coverter from "../components/Coverter";
 
 const SvgToJsx = () => {
   const [inputValue, setInputValue] = useState("");

@@ -41,10 +41,10 @@ export default () => {
     componentName: componentName,
   });
 
-  const transform = async (svg: string) => {
+  const transform = async (code: string) => {
     try {
-      const { data } = await axios.post("/api/svgr", {
-        svg: inputValue,
+      const { data } = await axios.post("/api/svg-to-jsx", {
+        svg: code,
         config: config,
         state: statePartial,
       });

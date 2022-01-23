@@ -3,8 +3,8 @@ const Switch = ({
   onChange,
   label,
 }: {
-  value: boolean;
-  onChange: (value: boolean) => void;
+  value?: boolean;
+  onChange?: (value: boolean) => void;
   label: string;
 }) => {
   return (

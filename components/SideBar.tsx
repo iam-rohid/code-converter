@@ -9,7 +9,7 @@ const menus: InputType[] = [
     outputs: [
       {
         output: "JSX",
-        href: "svg-to-jsx",
+        href: "/svg-to-jsx",
       },
       // {
       //   output: "React Native",
@@ -22,7 +22,7 @@ const menus: InputType[] = [
     outputs: [
       {
         output: "JSX",
-        href: "html-to-jsx",
+        href: "/html-to-jsx",
       },
       // {
       //   output: "Pug",
@@ -48,7 +48,7 @@ const MenuList = () => {
   return (
     <div className="flex-1 flex flex-col p-2 gap-4 overflow-y-auto">
       {menus.map((menu) => (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2" key={menu.input}>
           <p className="opacity-50 text-sm uppercase">{menu.input}</p>
           <div className="flex flex-col gap-1">
             {menu.outputs.map((item) => (
@@ -73,7 +73,7 @@ const MenuItem = ({
     <Link href={href}>
       <a
         className={`w-full h-8 rounded-md flex items-center justify-start px-4 truncate ${
-          router.pathname === `/${href}`
+          router.pathname === href
             ? "bg-primary-500 text-white"
             : "hover:bg-gray-100 dark:hover:bg-gray-800"
         }`}

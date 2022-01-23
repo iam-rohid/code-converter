@@ -1,3 +1,11 @@
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
 export default () => {
-  return <div>Hello</div>;
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/svg-to-jsx");
+  }, []);
+
+  return null;
 };

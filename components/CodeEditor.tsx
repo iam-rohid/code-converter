@@ -42,7 +42,6 @@ const CodeEditor = ({
     if (typeof window !== "undefined") {
       setModuleLoaded(false);
       load();
-      console.log("Loading module");
     }
   }, [typeof window]);
 
@@ -62,7 +61,6 @@ const CodeEditor = ({
         if (disabled) return;
         onChange && onChange(value);
       }}
-      onChange={(editor, data, value) => {}}
     />
   );
 };

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { HTMLAttributeAnchorTarget } from "react";
-import { StringOptions, StringOptionsWithImporter } from "sass";
 
 type LinkType = {
   as: "a";

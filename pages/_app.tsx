@@ -7,7 +7,7 @@ export default ({ Component, pageProps }) => {
     <div className="bg-white dark:bg-gray-900 w-screen h-screen flex overflow-hidden flex-col text-gray-900 dark:text-white">
       <Header />
       <div className="flex-1 flex overflow-hidden">
-        <SideBar />
+        {/* <SideBar /> */}
         <div className="flex-1">
           <Component {...pageProps} />
         </div>

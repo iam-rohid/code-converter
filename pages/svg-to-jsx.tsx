@@ -1,11 +1,12 @@
 import { ClipboardIcon, DownloadIcon } from "@heroicons/react/outline";
-import { Config } from "@svgr/core";
+import { Config, State } from "@svgr/core";
 import axios from "axios";
 import isSvg from "is-svg";
 import { Fragment, useEffect, useState } from "react";
 import Coverter from "../components/Coverter";
 import IconButton from "../components/IconButton";
 import Switch from "../components/Switch";
+import { pascalcase } from "pascalcase";
 
 const defaultSvg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="48px" height="1px" viewBox="0 0 48 1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -31,14 +32,21 @@ const defaultSvg = `<?xml version="1.0" encoding="UTF-8"?>
 export default () => {
   const [inputValue, setInputValue] = useState(defaultSvg);
   const [outputValue, setOutputValue] = useState("");
+  const [componentName, setComponentName] = useState("MyComponent");
   const [config, setConfig] = useState<Config>({
     plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx", "@svgr/plugin-prettier"],
   });
+
+  const [statePartial, setStatePartial] = useState<Partial<State>>({
+    componentName: componentName,
+  });
+
   const transform = async (svg: string) => {
     try {
       const { data } = await axios.post("/api/svgr", {
         svg: inputValue,
         config: config,
+        state: statePartial,
       });
       setOutputValue(data.jsx);
     } catch (error) {
@@ -57,7 +65,23 @@ export default () => {
     } else {
       transform(inputValue);
     }
-  }, [inputValue, config]);
+  }, [inputValue, config, statePartial]);
+
+  const onComponentNameChagne = (e) => {
+    e.preventDefault();
+
+    if (!componentName) {
+      setComponentName(statePartial.componentName);
+      return;
+    }
+    // Converting string to PascalCase
+    const pascalcaseName = pascalcase(componentName);
+    setComponentName(pascalcaseName);
+    setStatePartial({
+      ...statePartial,
+      componentName: pascalcaseName,
+    });
+  };
 
   return (
     <Coverter
@@ -112,6 +136,16 @@ export default () => {
       }
       outputActions={
         <Fragment>
+          <form onSubmit={onComponentNameChagne}>
+            <input
+              type="text"
+              value={componentName}
+              onChange={(e) => setComponentName(e.target.value)}
+              onBlur={onComponentNameChagne}
+              placeholder="Component Name"
+              className="bg-gray-100 dark:bg-gray-800 px-4 h-9 rounded-md outline-none focus:ring-1 ring-gray-200 dark:ring-gray-700"
+            />
+          </form>
           <IconButton icon={<ClipboardIcon className="h-5 w-5" />} />
           <IconButton icon={<DownloadIcon className="h-5 w-5" />} />
         </Fragment>

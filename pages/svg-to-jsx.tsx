@@ -7,6 +7,8 @@ import Coverter from "../components/Coverter";
 import IconButton from "../components/IconButton";
 import Switch from "../components/Switch";
 import { pascalcase } from "pascalcase";
+import { saveAs } from "file-saver";
+import { useSnackbar } from "../hooks/useSnackbar";
 
 const defaultSvg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="48px" height="1px" viewBox="0 0 48 1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -34,15 +36,15 @@ export default () => {
   const [outputValue, setOutputValue] = useState("");
   const [componentName, setComponentName] = useState("MyComponent");
   const [loading, setLoading] = useState(false);
-
   const [config, setConfig] = useState<Config>({
     plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx"],
     icon: true,
   });
-
   const [statePartial, setStatePartial] = useState<Partial<State>>({
     componentName: componentName,
   });
+
+  const snackbar = useSnackbar();
 
   const transform = async (code: string) => {
     setLoading(true);
@@ -86,6 +88,27 @@ export default () => {
     setStatePartial({
       ...statePartial,
       componentName: pascalcaseName,
+    });
+  };
+
+  const exportFile = () => {
+    var blob = new Blob([outputValue], {
+      type: "text/plain;charset=utf-8",
+    });
+    const extention = config.typescript ? "tsx" : "jsx";
+    const fileName = `${statePartial.componentName}.${extention}`;
+    saveAs(blob, fileName);
+    snackbar.show({
+      message: `${fileName} downloaded successfully`,
+      type: "success",
+    });
+  };
+
+  const copyOutput = () => {
+    window.navigator.clipboard.writeText(outputValue);
+    snackbar.show({
+      message: "Successfully copied to your clipboard",
+      type: "success",
     });
   };
 
@@ -168,10 +191,12 @@ export default () => {
           <IconButton
             icon={<ClipboardIcon className="h-5 w-5" />}
             title="Copy to clipboard"
+            onClick={copyOutput}
           />
           <IconButton
             icon={<DownloadIcon className="h-5 w-5" />}
             title="Download File"
+            onClick={exportFile}
           />
         </Fragment>
       }

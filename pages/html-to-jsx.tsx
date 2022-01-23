@@ -6,6 +6,8 @@ import IconButton from "../components/IconButton";
 import { ClipboardIcon, DownloadIcon } from "@heroicons/react/outline";
 import Switch from "../components/Switch";
 import { HtmlToJsxConfig } from "../types/configTypes";
+import { saveAs } from "file-saver";
+import { useSnackbar } from "../hooks/useSnackbar";
 
 const defaultHtml = `<!DOCTYPE html>
 <html>
@@ -26,11 +28,12 @@ export default () => {
   const [outputValue, setOutputValue] = useState("");
   const [componentName, setComponentName] = useState("MyCompoennt");
   const [loading, setLoading] = useState(false);
-
   const [config, setConfig] = useState<HtmlToJsxConfig>({
     createFunction: true,
     componentName: componentName,
   });
+
+  const snackbar = useSnackbar();
 
   const transform = async (code: string) => {
     setLoading(true);
@@ -69,6 +72,26 @@ export default () => {
     setConfig({
       ...config,
       componentName: pascalcaseName,
+    });
+  };
+  const exportFile = () => {
+    var blob = new Blob([outputValue], {
+      type: "text/plain;charset=utf-8",
+    });
+    const extention = "jsx";
+    const fileName = `${config.componentName}.${extention}`;
+    saveAs(blob, fileName);
+    snackbar.show({
+      message: `${fileName} downloaded successfully`,
+      type: "success",
+    });
+  };
+
+  const copyToClipboard = () => {
+    window.navigator.clipboard.writeText(outputValue);
+    snackbar.show({
+      message: "Successfully copied to your clipboard",
+      type: "success",
     });
   };
 
@@ -123,10 +146,12 @@ export default () => {
           <IconButton
             icon={<ClipboardIcon className="h-5 w-5" />}
             title="Copy to clipboard"
+            onClick={copyToClipboard}
           />
           <IconButton
             icon={<DownloadIcon className="h-5 w-5" />}
             title="Download File"
+            onClick={exportFile}
           />
         </Fragment>
       }

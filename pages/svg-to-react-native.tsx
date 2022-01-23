@@ -1,5 +1,3 @@
-const SvgToReactNative = () => {
+export default () => {
   return <div>Svg to React Native</div>;
 };
-
-export default SvgToReactNative;

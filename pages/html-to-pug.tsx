@@ -1,5 +1,3 @@
-const HtmlToPug = () => {
+export default () => {
   return <div>HTML to Pug</div>;
 };
-
-export default HtmlToPug;

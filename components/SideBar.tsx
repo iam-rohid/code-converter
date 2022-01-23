@@ -1,5 +1,6 @@
 import { SearchIcon } from "@heroicons/react/outline";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { InputType, OutputType } from "../types";
 
 const menus: InputType[] = [
@@ -67,11 +68,12 @@ const MenuItem = ({
   data: OutputType;
   input: string;
 }) => {
+  const router = useRouter();
   return (
     <Link href={href}>
       <a
         className={`w-full h-8 rounded-md flex items-center justify-start px-4 truncate ${
-          false
+          router.pathname === `/${href}`
             ? "bg-primary-500 text-white"
             : "hover:bg-gray-100 dark:hover:bg-gray-800"
         }`}

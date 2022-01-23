@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Coverter from "../components/Coverter";
 
-const HtmlToJsx = () => {
+export default () => {
   const [inputValue, setInputValue] = useState("");
   const [outputValue, setOutputValue] = useState("");
   return (
@@ -14,5 +14,3 @@ const HtmlToJsx = () => {
     />
   );
 };
-
-export default HtmlToJsx;

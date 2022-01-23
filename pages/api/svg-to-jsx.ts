@@ -2,6 +2,9 @@ import { transform } from "@svgr/core";
 import { NextApiRequest, NextApiResponse } from "next";
 import httpStatusCode from "../../utils/httpStatusCode";
 import prettify from "../../utils/prettier";
+require("@svgr/plugin-svgo");
+require("@svgr/plugin-jsx");
+require("@svgr/plugin-prettier");
 
 export default async function (
   req: NextApiRequest,

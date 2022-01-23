@@ -34,7 +34,8 @@ export default () => {
   const [outputValue, setOutputValue] = useState("");
   const [componentName, setComponentName] = useState("MyComponent");
   const [config, setConfig] = useState<Config>({
-    plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx", "@svgr/plugin-prettier"],
+    plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx"],
+    icon: true,
   });
 
   const [statePartial, setStatePartial] = useState<Partial<State>>({

@@ -1,7 +1,5 @@
 import { transform } from "@svgr/core";
-
 import { NextApiRequest, NextApiResponse } from "next";
-
 import httpStatusCode from "../../utils/httpStatusCode";
 import prettify from "../../utils/prettier";
 

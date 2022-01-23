@@ -1,7 +1,15 @@
-import { MenuIcon, StarIcon, SunIcon } from "@heroicons/react/outline";
+import {
+  CogIcon,
+  MenuIcon,
+  MoonIcon,
+  StarIcon,
+  SunIcon,
+} from "@heroicons/react/outline";
+import { useTheme } from "../hooks/useTheme";
 import IconButton from "./IconButton";
 import TextButton from "./TextButton";
 const Header = () => {
+  const { isDark, setIsDark } = useTheme();
   return (
     <nav className="w-full h-14 border-b border-gray-100 dark:border-gray-800 px-4 gap-4 flex overflow-hidden">
       <div className="h-full flex items-center flex-1">
@@ -21,7 +29,24 @@ const Header = () => {
             target="_blank"
             name="Buy me a Coffee"
           />
-          <IconButton icon={<SunIcon className="h-5 w-5" />} />
+          <IconButton
+            icon={
+              isDark ? (
+                <MoonIcon className="h-5 w-5" />
+              ) : (
+                <SunIcon className="h-5 w-5" />
+              )
+            }
+            onClick={() => {
+              setIsDark(!isDark);
+            }}
+            title="Toggle Dark Mode"
+          />
+          <IconButton
+            icon={<CogIcon className="h-5 w-5" />}
+            onClick={() => {}}
+            title="Settings"
+          />
         </div>
         <IconButton
           icon={<MenuIcon className="h-5 w-5" />}

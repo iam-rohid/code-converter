@@ -1,0 +1,19 @@
+@import "codemirror/lib/codemirror.css";
+@import "codemirror/theme/material.css";
+@import "codemirror/theme/xq-light.css";
+@tailwind components;
+
+.dark {
+  color-scheme: dark;
+}
+
+@layer components {
+  .react-codemirror2 {
+    .CodeMirror {
+      @apply bg-transparent h-full overflow-hidden;
+      .CodeMirror-gutters {
+        @apply bg-white dark:bg-gray-900;
+      }
+    }
+  }
+}

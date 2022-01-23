@@ -85,8 +85,10 @@ export default () => {
 
   return (
     <Coverter
-      inputName="SVG"
-      outputName="JSX"
+      inputName="svg"
+      outputName="jsx"
+      inputLanguage="xml"
+      outputLanguage="jsx"
       inputValue={inputValue}
       outputValue={outputValue}
       onInputValueChange={setInputValue}
@@ -99,6 +101,16 @@ export default () => {
               setConfig({
                 ...config,
                 native: value,
+              });
+            }}
+          />
+          <Switch
+            label="Title"
+            value={config.titleProp === true}
+            onChange={(value) => {
+              setConfig({
+                ...config,
+                titleProp: value,
               });
             }}
           />
@@ -146,8 +158,14 @@ export default () => {
               className="bg-gray-100 dark:bg-gray-800 px-4 h-9 rounded-md outline-none focus:ring-1 ring-gray-200 dark:ring-gray-700"
             />
           </form>
-          <IconButton icon={<ClipboardIcon className="h-5 w-5" />} />
-          <IconButton icon={<DownloadIcon className="h-5 w-5" />} />
+          <IconButton
+            icon={<ClipboardIcon className="h-5 w-5" />}
+            title="Copy to clipboard"
+          />
+          <IconButton
+            icon={<DownloadIcon className="h-5 w-5" />}
+            title="Download File"
+          />
         </Fragment>
       }
     />

@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
+import CodeEditor from "./CodeEditor";
 
 const Coverter = ({
   inputName,
@@ -8,6 +9,8 @@ const Coverter = ({
   outputValue,
   inputActions,
   outputActions,
+  inputLanguage,
+  outputLanguage,
 }: {
   inputName: string;
   outputName: string;
@@ -16,28 +19,34 @@ const Coverter = ({
   outputValue: string;
   inputActions?: ReactNode;
   outputActions?: ReactNode;
+  inputLanguage: string;
+  outputLanguage: string;
 }) => {
   return (
-    <div className="flex w-full h-full">
-      <div className="flex-1 flex flex-col border-r border-gray-100 dark:border-gray-800 overflow-hidden">
-        <Header title={inputName} subTitle="Input" actions={inputActions} />
-        <div className="flex-1">
-          <textarea
-            className="w-full h-full bg-transparent outline-none resize-none border-none"
-            value={inputValue}
-            onChange={(e) => onInputValueChange(e.target.value)}
-          ></textarea>
-        </div>
+    <div className="flex-1 flex w-full h-full overflow-hidden relative">
+      <div className="w-1/2 h-full left-0 flex flex-col absolute border-r border-gray-100 dark:border-gray-800">
+        <Header title={inputName} actions={inputActions} />
+        <CodeEditor
+          value={inputValue}
+          onChange={onInputValueChange}
+          options={{
+            mode: inputLanguage,
+          }}
+        />
       </div>
-      <div className="flex-1 flex flex-col">
-        <Header title={outputName} subTitle="Output" actions={outputActions} />
-        <div className="flex-1">
-          <textarea
-            className="w-full h-full bg-transparent outline-none resize-none border-none"
-            value={outputValue}
-            disabled
-          ></textarea>
-        </div>
+      <div className="w-1/2 h-full left-1/2 flex flex-col absolute">
+        <Header
+          title={outputName}
+          subTitle="Read only"
+          actions={outputActions}
+        />
+        <CodeEditor
+          value={outputValue}
+          disabled
+          options={{
+            mode: outputLanguage,
+          }}
+        />
       </div>
     </div>
   );
@@ -52,13 +61,13 @@ const Header = ({
 }: {
   actions: ReactNode;
   title: string;
-  subTitle: string;
+  subTitle?: string;
 }) => {
   return (
     <div className="h-14 w-full border-b border-gray-100 dark:border-gray-800 flex gap-2 items-center overflow-hidden justify-between">
       <div className="flex items-center gap-2 pl-4 pr-2">
-        <h2 className="font-bold">{title}</h2>
-        <p className="text opacity-20">{subTitle}</p>
+        <h2 className="font-bold uppercase">{title}</h2>
+        {subTitle && <p className="text opacity-30">{subTitle}</p>}
       </div>
       <div className="h-full flex items-center px-4 gap-2 overflow-x-auto">
         {actions}

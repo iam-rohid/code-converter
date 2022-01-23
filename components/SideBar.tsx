@@ -11,10 +11,10 @@ const menus: InputType[] = [
         output: "JSX",
         href: "svg-to-jsx",
       },
-      {
-        output: "React Native",
-        href: "svg-to-react-native",
-      },
+      // {
+      //   output: "React Native",
+      //   href: "svg-to-react-native",
+      // },
     ],
   },
   {
@@ -24,17 +24,17 @@ const menus: InputType[] = [
         output: "JSX",
         href: "html-to-jsx",
       },
-      {
-        output: "Pug",
-        href: "html-to-pug",
-      },
+      // {
+      //   output: "Pug",
+      //   href: "html-to-pug",
+      // },
     ],
   },
 ];
 
 const SideBar = () => {
   return (
-    <aside className="w-72 h-full border-r border-gray-100 dark:border-gray-800 flex flex-col overflow-hidden">
+    <aside className="w-64 h-full border-r border-gray-100 dark:border-gray-800 flex flex-col overflow-hidden">
       <SearchBar />
       <MenuList />
       {/* <div className="h-48 border-t border-gray-100 dark:border-gray-800"></div> */}

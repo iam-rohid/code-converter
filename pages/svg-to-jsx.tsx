@@ -33,6 +33,8 @@ export default () => {
   const [inputValue, setInputValue] = useState(defaultSvg);
   const [outputValue, setOutputValue] = useState("");
   const [componentName, setComponentName] = useState("MyComponent");
+  const [loading, setLoading] = useState(false);
+
   const [config, setConfig] = useState<Config>({
     plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx"],
     icon: true,
@@ -43,6 +45,7 @@ export default () => {
   });
 
   const transform = async (code: string) => {
+    setLoading(true);
     try {
       const { data } = await axios.post("/api/svg-to-jsx", {
         svg: code,
@@ -50,8 +53,10 @@ export default () => {
         state: statePartial,
       });
       setOutputValue(data.jsx);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -93,6 +98,7 @@ export default () => {
       inputValue={inputValue}
       outputValue={outputValue}
       onInputValueChange={setInputValue}
+      loading={loading}
       inputActions={
         <Fragment>
           <Switch

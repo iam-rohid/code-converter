@@ -1,4 +1,6 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode } from "react";
+import { Rings } from "react-loader-spinner";
+import { useTheme } from "../hooks/useTheme";
 import CodeEditor from "./CodeEditor";
 
 const Coverter = ({
@@ -11,6 +13,7 @@ const Coverter = ({
   outputActions,
   inputLanguage,
   outputLanguage,
+  loading,
 }: {
   inputName: string;
   outputName: string;
@@ -21,7 +24,9 @@ const Coverter = ({
   outputActions?: ReactNode;
   inputLanguage: string;
   outputLanguage: string;
+  loading?: boolean;
 }) => {
+  const { isDark } = useTheme();
   return (
     <div className="flex-1 flex w-full h-full overflow-hidden relative">
       <div className="w-1/2 h-full left-0 flex flex-col absolute border-r border-gray-100 dark:border-gray-800">
@@ -47,6 +52,13 @@ const Coverter = ({
             mode: outputLanguage,
           }}
         />
+        {loading && (
+          <div className="absolute w-full h-full left-0 top-0 z-10 flex items-center justify-center">
+            <div className="scale-75">
+              <div className="spinner"></div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

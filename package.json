@@ -1,6 +1,6 @@
 {
   "name": "code-converter",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "license": "MIT",
   "author": "rohid-hub",
   "repository": "https://github.com/rohid-hub/code-converter",
@@ -23,6 +23,7 @@
     "pascalcase": "^2.0.0",
     "prettier": "^2.5.1",
     "react-codemirror2": "^7.2.1",
+    "react-loader-spinner": "^5.1.0",
     "react-router-dom": "6"
   },
   "devDependencies": {

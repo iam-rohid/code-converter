@@ -25,12 +25,15 @@ export default () => {
   const [inputValue, setInputValue] = useState(defaultHtml);
   const [outputValue, setOutputValue] = useState("");
   const [componentName, setComponentName] = useState("MyCompoennt");
+  const [loading, setLoading] = useState(false);
+
   const [config, setConfig] = useState<HtmlToJsxConfig>({
     createFunction: true,
     componentName: componentName,
   });
 
   const transform = async (code: string) => {
+    setLoading(true);
     try {
       const { data } = await axios.post("/api/html-to-jsx", {
         html: code,
@@ -38,6 +41,7 @@ export default () => {
       });
       let jsx = data.jsx;
       setOutputValue(jsx);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -77,6 +81,7 @@ export default () => {
       inputValue={inputValue}
       outputValue={outputValue}
       onInputValueChange={setInputValue}
+      loading={loading}
       inputActions={
         <Fragment>
           {config.createFunction && (

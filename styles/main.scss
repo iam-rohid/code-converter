@@ -2,6 +2,7 @@
 @import "codemirror/theme/material.css";
 @import "codemirror/theme/xq-light.css";
 @tailwind components;
+@import "spinner";
 
 .dark {
   color-scheme: dark;

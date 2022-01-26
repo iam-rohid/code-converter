@@ -1,5 +1,5 @@
 type OutputType = {
-  output: string;
+  title: string;
   href: string;
 };
 

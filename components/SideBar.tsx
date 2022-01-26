@@ -5,29 +5,20 @@ import { InputType, OutputType } from "../types";
 
 const menus: InputType[] = [
   {
-    input: "SVG",
+    input: "Converters",
     outputs: [
       {
-        output: "JSX",
+        title: "SVG to JSX",
         href: "/svg-to-jsx",
       },
-      // {
-      //   output: "React Native",
-      //   href: "svg-to-react-native",
-      // },
-    ],
-  },
-  {
-    input: "HTML",
-    outputs: [
       {
-        output: "JSX",
+        title: "HTML to JSX",
         href: "/html-to-jsx",
       },
-      // {
-      //   output: "Pug",
-      //   href: "html-to-pug",
-      // },
+      {
+        title: "JSON to TS",
+        href: "/json-to-ts",
+      },
     ],
   },
 ];
@@ -52,7 +43,7 @@ const MenuList = () => {
           <p className="opacity-50 text-sm uppercase">{menu.input}</p>
           <div className="flex flex-col gap-1">
             {menu.outputs.map((item) => (
-              <MenuItem data={item} key={item.output} input={menu.input} />
+              <MenuItem data={item} key={item.title} input={menu.input} />
             ))}
           </div>
         </div>
@@ -62,7 +53,7 @@ const MenuList = () => {
 };
 
 const MenuItem = ({
-  data: { output: name, href },
+  data: { title: name, href },
   input,
 }: {
   data: OutputType;
@@ -78,7 +69,7 @@ const MenuItem = ({
             : "hover:bg-gray-100 dark:hover:bg-gray-800"
         }`}
       >
-        {input} to {name}
+        {name}
       </a>
     </Link>
   );

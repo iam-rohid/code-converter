@@ -1,6 +1,6 @@
 {
   "name": "code-converter",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "author": "rohid-hub",
   "repository": "https://github.com/rohid-hub/code-converter",
@@ -21,6 +21,7 @@
     "file-saver": "^2.0.5",
     "htmltojsx": "^0.3.0",
     "is-svg": "^4.3.2",
+    "json-ts": "^1.6.4",
     "pascalcase": "^2.0.0",
     "prettier": "^2.5.1",
     "react-codemirror2": "^7.2.1",

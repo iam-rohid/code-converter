@@ -31,7 +31,7 @@ const defaultSvg = `<?xml version="1.0" encoding="UTF-8"?>
     </g>
 </svg>`;
 
-export default () => {
+const SvgToJsxPage = () => {
   const [inputValue, setInputValue] = useState(defaultSvg);
   const [outputValue, setOutputValue] = useState("");
   const [componentName, setComponentName] = useState("MyComponent");
@@ -73,6 +73,7 @@ export default () => {
     } else {
       transform(inputValue);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue, config, statePartial]);
 
   const onComponentNameChagne = (e) => {
@@ -203,3 +204,4 @@ export default () => {
     />
   );
 };
+export default SvgToJsxPage;

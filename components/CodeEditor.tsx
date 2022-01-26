@@ -43,6 +43,7 @@ const CodeEditor = ({
       setModuleLoaded(false);
       load();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeof window]);
 
   if (!moduleLoaded) return null;

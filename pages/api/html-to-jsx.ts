@@ -4,10 +4,10 @@ import HtmlToJsx from "htmltojsx";
 import prettify from "../../utils/prettier";
 import { HtmlToJsxConfig } from "../../types/configTypes";
 
-export default async function (
+const ConvertHtmlToJsx = async (
   req: NextApiRequest,
   res: NextApiResponse
-): Promise<void> {
+): Promise<void> => {
   try {
     const config: HtmlToJsxConfig = req.body.config;
 
@@ -46,4 +46,5 @@ export default Memo;
   } catch (error) {
     res.status(httpStatusCode.BAD_REQUEST).send({ message: error.message });
   }
-}
+};
+export default ConvertHtmlToJsx;

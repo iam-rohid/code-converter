@@ -8,33 +8,32 @@ import Switch from "../components/Switch";
 import { saveAs } from "file-saver";
 import { useSnackbar } from "../hooks/useSnackbar";
 import { JsonTsOptions } from "json-ts";
-import { validate } from "jsonschema";
 
 const defaultHtml = `{
   "glossary": {
-      "title": "example glossary",
-  "GlossDiv": {
-          "title": "S",
-    "GlossList": {
-              "GlossEntry": {
-                  "ID": "SGML",
-        "SortAs": "SGML",
-        "GlossTerm": "Standard Generalized Markup Language",
-        "Acronym": "SGML",
-        "Abbrev": "ISO 8879:1986",
-        "GlossDef": {
-                      "para": "A meta-markup language, used to create markup languages such as DocBook.",
-          "GlossSeeAlso": ["GML", "XML"]
-                  },
-        "GlossSee": "markup"
-              }
-          }
+    "title": "example glossary",
+    "GlossDiv": {
+      "title": "S",
+      "GlossList": {
+        "GlossEntry": {
+          "ID": "SGML",
+          "SortAs": "SGML",
+          "GlossTerm": "Standard Generalized Markup Language",
+          "Acronym": "SGML",
+          "Abbrev": "ISO 8879:1986",
+          "GlossDef": {
+            "para": "A meta-markup language, used to create markup languages such as DocBook.",
+            "GlossSeeAlso": ["GML", "XML"]
+          },
+          "GlossSee": "markup"
+        }
       }
+    }
   }
 }
 `;
 
-export default () => {
+const JsonToTsPage = () => {
   const [inputValue, setInputValue] = useState(defaultHtml);
   const [outputValue, setOutputValue] = useState("");
   const [rootName, setRootName] = useState("RootObject");
@@ -67,6 +66,7 @@ export default () => {
     }
 
     transform(inputValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue, config]);
 
   const onComponentNameChagne = (e) => {
@@ -156,3 +156,5 @@ export default () => {
     />
   );
 };
+
+export default JsonToTsPage;

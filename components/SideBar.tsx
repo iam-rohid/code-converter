@@ -21,6 +21,15 @@ const menus: InputType[] = [
       },
     ],
   },
+  {
+    input: "Formatters",
+    outputs: [
+      {
+        title: "JSON Formatter",
+        href: "/json-formatter",
+      },
+    ],
+  },
 ];
 
 const SideBar = () => {

@@ -6,10 +6,10 @@ require("@svgr/plugin-svgo");
 require("@svgr/plugin-jsx");
 require("@svgr/plugin-prettier");
 
-export default async function (
+const ConvertSvgToJsx = async (
   req: NextApiRequest,
   res: NextApiResponse
-): Promise<void> {
+): Promise<void> => {
   try {
     let jsx = await transform(req.body.svg, req.body.config, req.body.state);
     jsx = prettify(jsx);
@@ -17,4 +17,5 @@ export default async function (
   } catch (error) {
     res.status(httpStatusCode.BAD_REQUEST).send({ message: error.message });
   }
-}
+};
+export default ConvertSvgToJsx;

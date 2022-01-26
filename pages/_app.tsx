@@ -4,11 +4,13 @@ import "tailwindcss/tailwind.css";
 import "../styles/main.scss";
 import ThemeProvider from "../hooks/useTheme";
 import SnackbarProvider from "../hooks/useSnackbar";
-export default ({ Component, pageProps }) => {
+import { AppProps } from "next/app";
+
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider>
       <SnackbarProvider>
-        <div className="bg-white dark:bg-gray-900 w-screen h-screen flex overflow-hidden flex-col text-gray-900 dark:text-white">
+        <div className="w-screen h-screen flex overflow-hidden flex-col">
           <Header />
           <div className="flex-1 flex overflow-hidden">
             <SideBar />
@@ -21,3 +23,4 @@ export default ({ Component, pageProps }) => {
     </ThemeProvider>
   );
 };
+export default MyApp;
